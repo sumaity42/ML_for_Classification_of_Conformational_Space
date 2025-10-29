@@ -1,5 +1,13 @@
 
 def load_sys():
+    """ Function to create a dictonary to upload pdb and trajectroy files
+    for all systems
+    Returns
+    -------
+    dict
+        A dictionary where keys are pdb file and dcd files path are dictionaries with
+        'pdb', 'dcd1', 'dcd2', and 'dcd3' keys.
+    """
     sys_dict = {
         'd_ox': {
             'pdb': '../../dark/simulation/MD-simulation/oxidized/build/dark_ox_apo_prot_only_initial.pdb',
