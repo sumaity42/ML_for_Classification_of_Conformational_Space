@@ -12,7 +12,7 @@ The features are distances between Calpha pair if its less than 15 Å.
 
 ## 2. Workflow:
 The workflow is organized as follows:
-Add pdb and trajectory files location in the Create_Dictionary.py file.
-Run Main_Script_residue.py for all systems to create unique Calpha pair list based on cutoff.
-Run Main_Script_dist.py and save dataframe only for unique pairs.
-Run RF_model.py and plot scatter_matrix, feature_importance
+i. Add pdb and trajectory files location in the Create_Dictionary.py file.
+ii. Run Main_Script_residue.py for all systems to create unique Calpha pair list based on cutoff.
+iii. Run Main_Script_dist.py and save dataframe only for unique pairs.
+iv. Run RF_model.py and plot scatter_matrix, feature_importance
