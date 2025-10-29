@@ -2,6 +2,7 @@
 def load_sys():
     """ Function to create a dictonary to upload pdb and trajectroy files
     for all systems
+    
     Returns
     -------
     dict
