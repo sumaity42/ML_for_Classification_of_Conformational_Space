@@ -10,7 +10,7 @@ df = pd.DataFrame()
 
 if __name__ == "__main__":
 
-    sys = ['d_ox', 'd_red', 'b_ox', 'b_red', 'R121S', 'Y126F', 'P141G']
+    sys = ['d_ox', 'd_red', 'b_ox', 'b_red', 'R121S', 'Y126F', 'P141G', 'With', 'WithOut']
     cutoff = 15
 
     for Sys in sys:
