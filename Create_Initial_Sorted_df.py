@@ -10,6 +10,16 @@ import warnings
 warnings.filterwarnings('ignore')
 
 def make_sorted_df(PDB, cutoff):
+    """ Function to calculate distances between Calpha atoms pair and sort depending on a cutoff value.
+
+    Args:
+    -----------------
+    PDB: pdb file
+    cutoff: cutoff distance
+    Returns:
+    -----------------
+    dataframe: distance data with column name as resid1_segname1_resid2_segname2 for each pair
+    """
 
     u = mda.Universe(PDB)
 
