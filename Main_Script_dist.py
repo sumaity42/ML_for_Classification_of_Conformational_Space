@@ -13,7 +13,7 @@ print('Shape of the sorted and unique dataframe: {}'.format(data.shape))
 
 if __name__ == "__main__":
 
-    sys = ['With', 'WithOut'] # 'R121S', 'Y126F', 'P141G', 'd_ox', 'd_red'] #, 'b_ox', 'b_red']
+    sys = ['With', 'WithOut', 'R121S', 'Y126F', 'P141G', 'd_ox', 'd_red', 'b_ox', 'b_red']
 
     for Sys in sys:
         system = load_sys()[Sys]
