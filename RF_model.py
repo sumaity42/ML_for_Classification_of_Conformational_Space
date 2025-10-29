@@ -2,6 +2,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 import seaborn as sns
+from pandas.plotting import scatter_matrix
 
 # Scikit-learn utilities
 from sklearn.utils import shuffle
@@ -43,40 +44,58 @@ def make_df(pkl1, pkl2, cut):
 
 	return (shuffle_df)
 
-#------------------------------------------------------------------
-def plot_feat_Imp(Important_feat_list, figname):
+def plot_feat_Imp(Important_feat_list, n_feat, figname):
+	""" Function to plot feature importance for few most important features.
 
-        xtick_labels = []
+	Parameter:
+	----------
+	Important_feat_list: sorted list of (feature name, importance)
+	n_feat: number of features want to plot
+	figname: Name of figure 
+	
+	Returns:
+	--------
+	None
+	"""
+    xtick_labels = []
 
-        fig, ax = plt.subplots(figsize=(12, 6))
+    fig, ax = plt.subplots(figsize=(12, 6))
 
-        for i in range(0,20):
-                ax.bar(i, Important_feat_list[i][1])
-                xtick_labels.append(Important_feat_list[i][0])
+    for i in range(0,n_feat):
+            ax.bar(i, Important_feat_list[i][1])
+            xtick_labels.append(Important_feat_list[i][0])
 
-        ax.set_xticks(np.arange(0,20,1))
-        ax.set_xticklabels(xtick_labels, rotation=90, ha='right', rotation_mode='anchor')
-        ax.set_title("Top 10 feature importance")
-        ax.set_ylabel("Scores")
+    ax.set_xticks(np.arange(0,n_feat,1))
+    ax.set_xticklabels(xtick_labels, rotation=90, ha='right', rotation_mode='anchor')
+    ax.set_title("Top 10 feature importance")
+    ax.set_ylabel("Scores")
 
-        plt.savefig(figname, dpi=600, bbox_inches='tight', pad_inches=0.02)
+    plt.savefig(figname, dpi=600, bbox_inches='tight', pad_inches=0.02)
 
-#------------------------------------------------------------------------------
 def plot_scatter_mat(total_df, top_feat_df, figname):
-        from pandas.plotting import scatter_matrix
+	""" Function to plot scatter matrix of few most important features.
+	
+	Parameters:
+	-----------
+	total_df: distancs data frame
+	top_feat_df: List of top features name
+	figname: Name of figure 
+	
+	Returns:
+	--------
+	None
+	"""
+    # List of top 10 features name
+    top_10_feat = top_feat_df
+    z = total_df['label']
 
-        # Top 10 features
-        top_10_feat = top_feat_df
-        z = total_df['label']
+    scatter = scatter_matrix(top_10_feat, c=z, marker='.', s=40,
+    figsize=(20,20), hist_kwds={'bins':15})
 
-        scatter = scatter_matrix(top_10_feat, c=z, marker='.', s=40,
-        figsize=(20,20), hist_kwds={'bins':15})
+    plt.savefig(figname, dpi=450, bbox_inches='tight', pad_inches=0.02)
 
-        plt.savefig(figname, dpi=450, bbox_inches='tight', pad_inches=0.02)
-
-#-------------------------------------------------------------------------------
-
-data = make_df(R121S, Y126F, 1)
+stride = 1 # To open the dataframe
+data = make_df(R121S, Y126F, stride)
 
 X = data.iloc[:, :-1]
 y = data['label']
@@ -121,7 +140,7 @@ top_10_feat = data[List]
 plt.rcParams['font.size'] = 15
 plt.rcParams['axes.linewidth'] = 1.5
 
-plot_feat_Imp(sorted_feature_imp, 'RF_Top20_Feature_Imp_R121S_Y126F.png')
+plot_feat_Imp(sorted_feature_imp, n_feat, 'RF_Top20_Feature_Imp_R121S_Y126F.png')
 
 plot_scatter_mat(data, top_10_feat, 'Scatter_Matrix_Top10_Feat_R121S_Y126F.png')
 
