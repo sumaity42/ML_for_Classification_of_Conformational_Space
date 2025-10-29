@@ -7,10 +7,10 @@ We suggest running the following command to create a conda environment called ML
 conda env create -f environment.yml
 
 # Repo details
-1. Features:
+# 1. Features:
 The features are distances between Calpha pair if its less than 15 Å.
 
-2. Workflow:
+# 2. Workflow:
 The workflow is organized as follows:
 Add pdb and trajectory files location in the Create_Dictionary.py file.
 Run Main_Script_residue.py for all systems to create unique Calpha pair list based on cutoff.
