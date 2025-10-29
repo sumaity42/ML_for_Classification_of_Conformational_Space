@@ -1,4 +1,25 @@
-def ML_Model(data):
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+import seaborn as sns
+from pandas.plotting import scatter_matrix
+
+# Plotting function
+from Plot import plot_feat_Imp, plot_scatter_mat
+
+# Scikit-learn utilities
+from sklearn.utils import shuffle
+from sklearn.model_selection import train_test_split, cross_val_score, KFold, ShuffleSplit
+#from sklearn.model_selection import GridSearchCV
+from sklearn.ensemble import RandomForestClassifier
+#from sklearn.linear_model import LogisticRegression
+#from sklearn.neural_network import MLPClassifier
+#from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import StandardScaler
+
+import pickle
+
+def ML_Model(data, sorted_Imp_name, feat_Imp_figname, Scatter_Mat_figname):
 	X = data.iloc[:, :-1]
 	y = data['label']
 
@@ -25,7 +46,7 @@ def ML_Model(data):
 								key=lambda x:x[1], reverse=True)
 
 	# Save sorted importance data
-	Name = 'Feature_Importance_RF_R121S_Y126F.pkl'
+	Name = sorted_Imp_name 
 	with open(Name, "wb") as fp:
  		pickle.dump(sorted_feature_imp, fp)
 		
@@ -42,7 +63,7 @@ def ML_Model(data):
 	plt.rcParams['axes.linewidth'] = 1.5
 
 	# Plot top {n_feat} feature importance
-	plot_feat_Imp(sorted_feature_imp, n_feat, 'RF_Top20_Feature_Imp_R121S_Y126F.png')
+	plot_feat_Imp(sorted_feature_imp, n_feat, feat_Imp_figname)
 
 	# Plot scatter matrix for top {n_feat} feature
-	plot_scatter_mat(data, top_10_feat, 'Scatter_Matrix_Top10_Feat_R121S_Y126F.png')
+	plot_scatter_mat(data, top_10_feat, Scatter_Mat_figname)
