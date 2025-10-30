@@ -1,3 +1,9 @@
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+import seaborn as sns
+from pandas.plotting import scatter_matrix
+
 def plot_feat_Imp(Important_feat_list, n_feat, figname):
 	""" Function to plot feature importance for few most important features.
 
