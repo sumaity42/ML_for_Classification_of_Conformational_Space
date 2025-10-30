@@ -57,6 +57,12 @@ if __name_ == "__main__":
 
 	#############
 	# Drop features based on correlation coefficient
+	features = shuffle_df.iloc[:, :-1]
+	corr = features.corr().abs()
+	cutoff_th = 0.9
+
+	# Complete this part
+	
 	#############
 
 
