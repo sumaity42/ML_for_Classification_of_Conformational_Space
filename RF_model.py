@@ -30,12 +30,13 @@ def make_df(pkl, target):
 		df1 = pickle.load(f1)
 	f1.close()
 
-	# Add target : active or inactive
+	# Add target : active (1) or inactive (0)
 	df1['label'] = target
 	
 	return (df1)
 
 stride = 1 # To open the dataframe
+# Create a blank dataframe
 df = pd.DataFrame()
 
 if __name_ == "__main__":
