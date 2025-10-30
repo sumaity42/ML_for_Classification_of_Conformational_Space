@@ -1,0 +1,14 @@
+name: MLClassify
+channels:
+- conda-forge
+- schrodinger
+dependencies:
+# required for building docs
+  - python==3.11
+  - pip
+  - numpy
+  - scikit-learn
+  - MDAnalysis
+  - pandas
+  - seaborn
+  
