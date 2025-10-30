@@ -5,7 +5,7 @@ import seaborn as sns
 from pandas.plotting import scatter_matrix
 
 # Load features
-from Load_feature import load_feat
+from Create_Dictionary import load_sys
 
 # ML training and prediction
 from ML_Pred import ML_Model
@@ -41,7 +41,7 @@ df = pd.DataFrame()
 if __name_ == "__main__":
 	sys = ['d_ox', 'd_red', 'b_ox', 'b_red', 'R121S', 'Y126F', 'P141G', 'With', 'WithOut']
 	for Sys in sys:
-		system = load_feat()[Sys]
+		system = load_sys()[Sys]
 		d = make_df(system['pkl'], system['target'])
 
 		df = pd.concat([df, d], ignore_index=True)
