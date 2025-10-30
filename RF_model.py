@@ -55,6 +55,11 @@ if __name_ == "__main__":
 	# Shuffle the data
 	shuffle_df = shuffle(cut_df, random_state=20)
 
+	#############
+	# Drop features based on correlation coefficient
+	#############
+
+
 	# Training and plot
 	ML_Model(shuffle_df, 'Feature_Importance_RF_R121S_Y126F.pkl', 
 			 'RF_Top20_Feature_Imp_R121S_Y126F.png', 'Scatter_Matrix_Top10_Feat_R121S_Y126F.png')
