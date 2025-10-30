@@ -8,7 +8,7 @@ conda env create -f environment.yml
 
 # Repo details
 ## 1. Features:
-The features are distances between Calpha pair if its less than 15 Å.
+If distances between Calpha pair is less than 15 Å, consider it as a feature.
 
 ## 2. Workflow:
 The workflow is organized as follows:
