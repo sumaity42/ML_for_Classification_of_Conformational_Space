@@ -17,7 +17,7 @@ def plot_feat_Imp(Important_feat_list, n_feat, figname):
 	--------
 	None
 	"""
-    xtick_labels = []
+	xtick_labels = []    
 
     fig, ax = plt.subplots(figsize=(12, 6))
 
