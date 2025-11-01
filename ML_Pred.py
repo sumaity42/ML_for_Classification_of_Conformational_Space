@@ -56,8 +56,8 @@ def ML_Model(data, sorted_Imp_name, feat_Imp_figname, Scatter_Mat_figname):
 	List = []
 
 	for i in range(0, n_feat):
-    	List.append(sorted_feature_imp[i][0])
-
+		List.append(sorted_feature_imp[i][0])
+		
 	top_10_feat = data[List]
 
 	plt.rcParams['font.size'] = 15
