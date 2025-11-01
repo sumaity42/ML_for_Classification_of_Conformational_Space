@@ -1,14 +1,14 @@
 name: MLClassify
 channels:
-- conda-forge
-- schrodinger
+  - conda-forge
+  - defaults
 dependencies:
-# required for building docs
-  - python==3.11
+  - python >=3.11.*
   - pip
-  - numpy
-  - scikit-learn
-  - MDAnalysis
   - pandas
+  - numpy
+  - matplotlib
+  - scikit-learn
+  - scipy
   - seaborn
-  
+ 
