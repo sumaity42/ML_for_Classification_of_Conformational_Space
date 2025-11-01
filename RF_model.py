@@ -55,17 +55,17 @@ if __name_ == "__main__":
 	# Shuffle the data
 	shuffle_df = shuffle(cut_df, random_state=20)
 
-	#############
-	# Drop features based on correlation coefficient
+	# Drop features if correlation coefficient > cutoff_th
 	features = shuffle_df.iloc[:, :-1]
 	corr = features.corr().abs()
 	cutoff_th = 0.9
 
-	# Complete this part
-	
-	#############
+	upper_corr = corr.where(np.triu(np.ones(corr.shape), k=1).astype(np.bool))
+	drop_col = [column for column in upper_corr.columns if any(upper_corr[column] > cutoff_th)]
+	df_dropped = shuffle_df.drop(columns = drop_col)
 
+	print('Shape of the dataframe after dropping high correlated features : {}'.format(df_dropped.shape))
 
 	# Training and plot
-	ML_Model(shuffle_df, 'Feature_Importance_RF_R121S_Y126F.pkl', 
+	ML_Model(df_dropped, 'Feature_Importance_RF_R121S_Y126F.pkl', 
 			 'RF_Top20_Feature_Imp_R121S_Y126F.png', 'Scatter_Matrix_Top10_Feat_R121S_Y126F.png')
