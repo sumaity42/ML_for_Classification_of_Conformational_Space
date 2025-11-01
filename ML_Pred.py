@@ -37,7 +37,8 @@ def ML_Model(data, sorted_Imp_name, feat_Imp_figname, Scatter_Mat_figname):
 	RF.fit(scaled_X_train, y_train)
 	
 	#RF.score(X_test, y_test)
-	RF.score(scaled_X_test, y_test)
+	Score = RF.score(scaled_X_test, y_test)
+	print(f'Accuracy score of the RF model: {}'.format(Score))
 
 	feature_importances = RF.feature_importances_
 	feature_names = data.columns
