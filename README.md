@@ -24,4 +24,4 @@ iv. Add distance dataframe and target lebel in the Create_Dictionary.py file.
 v. Run RF_model.py and plot scatter_matrix, feature_importance
 
 # Datasets
-A subset of data will be uploaded soon.
+A subset of data will be uploaded shortly.
