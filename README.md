@@ -1,5 +1,5 @@
 # ML_for_Classification_of_Conformational_Space
-This repository contains the data and the scripts used for the manuscript "bPAC paper".
+This repository contains the data and the scripts used for the manuscript "Identification of Key Residues in Allosteric Signaling of Photoactivated Adenylyl Cyclase".
 
 # Building conda environment
 We suggest running the following command to create a conda environment called MLClassify:
