@@ -6,7 +6,7 @@ from pandas.plotting import scatter_matrix
 
 # Load features
 from Create_Dictionary import load_sys
-from Plot_1 import plot_lc, plot_kde_1, plot_kde_2
+from Plot import plot_lc, plot_kde_1, plot_kde_2
 
 # Scikit-learn utilities
 from sklearn.utils import shuffle
@@ -76,21 +76,6 @@ def make_df(pkl, target, system_index, Sys):
     df_float16['system_index'].astype(np.int16)
 
     return (df_float16.iloc[::stride, :])
-
-#@njit
-def Numba_Corr(features):
-    """Convert features dataframe to numpy array, Calculate correlation,
-    and convert back numpy_array to dataframe.
-    """
-    feat_numpy = features.to_numpy()
-    corr_numpy = np.corrcoef(feat_numpy, rowvar=False)
-    abs_corr_numpy = np.abs(corr_numpy)
-
-    # Convert to dataframe
-    corr_numba = pd.DataFrame(abs_corr_numpy, index=features.columns, 
-            columns=features.columns)
-
-    return (corr_numba)
 
 # Load multiple systems in parallel
 def load_all_system():
