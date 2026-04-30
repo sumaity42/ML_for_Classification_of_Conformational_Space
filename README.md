@@ -19,9 +19,15 @@ ii. Run Main_Script_residue.py for all systems to create unique Calpha pair list
 
 iii. Run Main_Script_dist.py and save dataframe only for unique pairs.
 
-iv. Add distance dataframe and target lebel in the Create_Dictionary.py file.
+iv. Add distance dataframe ('pkl'), 'target' and 'system_index' in the Create_Dictionary.py file.
 
-v. Run RF_model.py and plot scatter_matrix, feature_importance
+v. Run Calculate_feature_Correlation.py to calculate feature correlation and saved the correlated features name.
+
+vi. Perform hyperparameter optimization: RF_Hyperparameter_optimization.py for Random Forest (RF) and ETC_Hyperparameter_optimization for Extratrees Classifier (ETC).
+
+vii. With the optimized parameters train the model, make prediction and save average importance score: RF_model_final.py for RF and ETC_model_final.py for ETC.
+
+viii. 
 
 # Datasets
 A subset of data will be uploaded shortly.
