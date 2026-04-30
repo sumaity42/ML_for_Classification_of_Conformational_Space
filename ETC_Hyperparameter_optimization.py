@@ -77,21 +77,6 @@ def make_df(pkl, target, system_index, Sys):
 
     return (df_float16.iloc[::stride, :])
 
-#@njit
-def Numba_Corr(features):
-    """Convert features dataframe to numpy array, Calculate correlation,
-    and convert back numpy_array to dataframe.
-    """
-    feat_numpy = features.to_numpy()
-    corr_numpy = np.corrcoef(feat_numpy, rowvar=False)
-    abs_corr_numpy = np.abs(corr_numpy)
-
-    # Convert to dataframe
-    corr_numba = pd.DataFrame(abs_corr_numpy, index=features.columns, 
-            columns=features.columns)
-
-    return (corr_numba)
-
 # Load multiple systems in parallel
 def load_all_system():
     sys_list = SYSTEMS
