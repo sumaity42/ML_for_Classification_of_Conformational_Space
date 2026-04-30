@@ -1,29 +1,14 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[1]:
-
-
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 import seaborn as sns
 import pickle
 
-
-# In[2]:
-
-
 plt.rcParams['font.size'] = 15
 plt.rcParams['axes.linewidth'] = 1.5
 plt.rcParams['figure.figsize'] = (8,5)
 
-
-# ## Add all the residue importance
-
-# In[3]:
-
-
+# Add all the residue importance
 def sum_elements(imp_array):
     resid = []
     for i in imp_array:
@@ -39,10 +24,6 @@ def sum_elements(imp_array):
                 
         import_sum.append([i, su])
     return (import_sum)
-
-
-# In[11]:
-
 
 def calc_residue_imp(datafile):
     with open(datafile, "rb") as fp:
@@ -100,10 +81,6 @@ def calc_residue_imp(datafile):
 
     return (Final_Residue_Imp)
 
-
-# In[47]:
-
-
 def calc_norm(data):
     # Normalize importance value 
     MIN = np.min(data.astype(float))
@@ -118,7 +95,6 @@ def imp_plot(x, y, figname):
 
     plt.xlabel("# residue")
     plt.ylabel('Importance score')     
-    #plt.title("Random forest Model")
 
     plt.xlim(0, 700)
     plt.ylim(0, 1)
@@ -129,10 +105,6 @@ def imp_plot(x, y, figname):
     plt.savefig(figname, dpi=450, pad_inches=0.03, bbox_inches='tight')
     plt.close()
 
-
-# In[1]:
-
-
 def save_norm_imp(n_res, imp_val, files):
     with open(files, 'w') as file:
         for i in range (700):
@@ -141,16 +113,8 @@ def save_norm_imp(n_res, imp_val, files):
                   
             file.write(f'{res}\t {val}\n')
 
-
-# In[48]:
-
-
 rf_imp = calc_residue_imp('RF_Mean_feature_importance.pkl') 
 etc_imp = calc_residue_imp('ETC_Mean_feature_importance.pkl') 
-
-
-# In[49]:
-
 
 rf_imp = np.array(rf_imp)
 etc_imp = np.array(etc_imp)
@@ -162,29 +126,14 @@ x_val = rf_imp[:, 0].astype(float).astype(int)
 rf_y_val = rf_imp[:, 1]
 etc_y_val = etc_imp[:, 1]
 
-
-# In[50]:
-
-
 norm_rf_imp = calc_norm(rf_y_val)
 norm_etc_imp = calc_norm(etc_y_val)
 
-
-# In[51]:
-
-
 imp_plot(x_val, norm_rf_imp, 'RF_Residue_Importance_using_function.png')
-
-
-# In[52]:
-
 
 imp_plot(x_val, norm_etc_imp, 'ETC_Residue_Importance_using_function.png')    
 
-
-# In[55]:
-
-
+# Plot RF and ETC values together
 plt.plot(x_val, norm_rf_imp, label='RF')
 plt.plot(x_val, norm_etc_imp, label='ETC')
 
@@ -204,148 +153,11 @@ plt.legend(frameon=False)
 
 #plt.show()
 plt.savefig('RF_ETC_Residue_Importance_using_function.png', dpi=450, pad_inches=0.03, bbox_inches='tight')
-
-
-# In[2]:
-
+plt.close()
 
 # Save Normalize importance for RF
 save_norm_imp(x_val, norm_rf_imp, 'RF.dat')
 
-
 # Save Normalize importance for ETC
 save_norm_imp(x_val, norm_etc_imp, 'ETC.dat')
-
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-
-
-
-# In[59]:
-
-
-joint_etc = []
-with open('ETC_Residue_Importance_using_function.dat', 'w') as file:
-    for i in range (700):
-        res = int(x_val[i])
-        val = '%.2f' %norm_etc_imp[i]
-
-        joint_etc.append([res, val])
-        #print('res: {}, imp: {}'.format(res, val))         
-        file.write(f'{res}\t {val}\n')
-
-
-# In[72]:
-
-
-joint_etc = np.array(joint_etc)
-sorted_joint_etc = joint_etc[joint_etc[:, 1].argsort()[::-1]]
-
-
-# In[69]:
-
-
-joint_rf = []
-with open('RF_Residue_Importance_using_function.dat', 'w') as file:
-    for i in range (700):
-        res = int(x_val[i])
-        val = '%.2f' %norm_rf_imp[i]
-
-        joint_rf.append([res, val])
-        #print('res: {}, imp: {}'.format(res, val))
-                  
-        file.write(f'{res}\t {val}\n')
-
-
-# In[73]:
-
-
-joint_rf = np.array(joint_rf)
-sorted_joint_rf = joint_rf[joint_rf[:, 1].argsort()[::-1]]
-
-
-# In[76]:
-
-
-Sorted_imp = np.hstack((sorted_joint_etc, sorted_joint_rf))
-
-
-# In[77]:
-
-
-Sorted_imp
-
-
-# In[80]:
-
-
-df = pd.DataFrame(Sorted_imp, columns=['ETC_res', 'ETC_imp', 'RF_res', 'RF_imp'])
-
-
-# In[81]:
-
-
-df
-
-
-# In[82]:
-
-
-# Save to Excel
-df.to_excel("output.xlsx") #, index=False, header=False)
-
-
-# # Common residues between 1st 25 from ETC and RF model
-
-# In[103]:
-
-
-common_res = np.intersect1d(df['ETC_res'][:25], df['RF_res'][:25])
-
-
-# In[104]:
-
-
-print('Number of common residues: {}'.format(len(common_res)))
-
-
-# In[105]:
-
-
-common_res
-
-
-# In[111]:
-
-
-common_res[0]
-
-
-# In[112]:
-
-
-df['ETC_res'][:25][0]
-
-
-# In[116]:
-
-
-for i in range(25):
-    print(df['ETC_res'][:25][i], common_res[i])
-    if df['ETC_res'][:25][i] == common_res.any():
-        print(df['ETC_res'][:25][i])
-
-
-# In[ ]:
-
-
-
 
