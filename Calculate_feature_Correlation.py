@@ -104,12 +104,6 @@ def main():
     drop_col = [column for column in upper_corr.columns if any(upper_corr[column] > cutoff_th)]
     print('Number of features to drop: {}'.format(len(drop_col)))
 
-    #df_dropped = shuffle_df.drop(columns = drop_col)
-
-    #print('Shape of the features after drop: {}'.format(df_dropped.shape))
-
-    #drop_col.to_pickle('Correlated_feature_from_all_data.pkl')
-
     drop_df = pd.DataFrame(columns=drop_col)
     drop_df.to_pickle('Correlated_feature_from_all_data.pkl')
 
