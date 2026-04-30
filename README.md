@@ -27,7 +27,7 @@ vi. Perform hyperparameter optimization: RF_Hyperparameter_optimization.py for R
 
 vii. With the optimized parameters train the model, make prediction and save average importance score: RF_model_final.py for RF and ETC_model_final.py for ETC.
 
-viii. 
+viii. Run Feature_to_residue_importance.py to convert feature importance to residue importance.
 
 # Datasets
 A subset of data will be uploaded shortly.
